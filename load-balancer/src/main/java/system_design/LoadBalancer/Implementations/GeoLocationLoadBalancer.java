@@ -27,10 +27,20 @@ public class GeoLocationLoadBalancer extends LoadBalancer {
     }
 
     @Override
-    public String handleRequest(Map<String, Map<String, String>> request) {
+    public void handleRequest(Map<String, Map<String, String>> request) {
         String clientGeoLocation = request.get("headers").get("Geo Location");
         Server selectedServer = selectServer(clientGeoLocation);
-        return selectedServer.processRequest(request).join();
+        selectedServer.processRequest(request);
     }
+
+    // public void handleRequest(Map<String, Map<String, String>> request) {
+    //     if (servers.isEmpty()) {
+    //         System.out.println("No available servers!");
+    //     } else {
+    //         Server selectedServer = selectServer();
+    //         selectedServer.processRequest(request);
+    //     }
+    // }
+
 }
 

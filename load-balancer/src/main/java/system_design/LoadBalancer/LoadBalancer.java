@@ -29,11 +29,12 @@ public abstract class LoadBalancer {
         connectionCount.remove(server);
     }
 
-    public String handleRequest(Map<String, Map<String, String>> request) {
+    public void handleRequest(Map<String, Map<String, String>> request) {
         if (servers.isEmpty()) {
-            return "No available servers!";
+            System.out.println("No available servers!");
+        } else {
+            Server selectedServer = selectServer();
+            selectedServer.processRequest(request);
         }
-        Server selectedServer = selectServer();
-        return selectedServer.processRequest(request).join();
     }
 }
