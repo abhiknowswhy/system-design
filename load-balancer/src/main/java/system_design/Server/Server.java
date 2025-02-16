@@ -12,7 +12,7 @@ public class Server {
     private final String serverGeoLocation;
     private final Map<String, Integer> activeConnections = new ConcurrentHashMap<>();
     private final ExecutorService executorService = Executors.newCachedThreadPool();
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public Server(String serverIP, String serverGeoLocation) {
         this.serverIP = serverIP;
