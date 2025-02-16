@@ -28,30 +28,34 @@ public class Server {
             String geoLocation = headers.get("Geo Location");
             String name = body.get("name");
 
+
+            int latency;
+            if (this.serverGeoLocation.equals(geoLocation)){
+                latency=200+random.nextInt(50); // 0.2-second latency
+            }
+            else {
+                latency=2000+random.nextInt(200); // 0.2-second latency
+            }
+
+            // Simulate latency
+            try {
+                Thread.sleep(latency);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
             // Handle request based on active connections
             String response;
             if (activeConnections.size() < 2) {
                 activeConnections.put(clientIP, activeConnections.getOrDefault(clientIP, 0) + 1);
                 response = "Hi " + name + " using " + clientIP + " from " + geoLocation +
-                        ", you are connected to server at " + serverIP + " located in " + serverGeoLocation;
+                        ", you are connected to server at " + serverIP + " located in " + serverGeoLocation + "\t| request latency = " + latency;
     
                 // Remove client from active connections after processing
                 activeConnections.remove(clientIP);
             } else {
                 response = "Hi " + name + " using " + clientIP + " from " + geoLocation +
                         ", we are experiencing heavy traffic at the moment";
-            }
-
-            // Simulate delay
-            try {
-                if (this.serverGeoLocation.equals(geoLocation)){
-                    Thread.sleep(200+random.nextInt(50)); // 0.2-second delay
-                }
-                else {
-                    Thread.sleep(2000+random.nextInt(500)); // 2-second delay
-                }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
             }
 
             System.out.println(response);

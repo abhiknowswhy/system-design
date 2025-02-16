@@ -12,8 +12,8 @@ public class RoundRobin {
     public static void main(String[] args) {
         // Create Servers
         Server server1 = new Server("192.168.1.1", "New York");
-        Server server2 = new Server("192.168.1.2", "California");
-        Server server3 = new Server("192.168.1.3", "Texas");
+        Server server2 = new Server("192.168.1.2", "Los Angeles");
+        Server server3 = new Server("192.168.1.3", "Chicago");
 
         List<Server> servers = Arrays.asList(server1, server2, server3);
 
@@ -23,14 +23,17 @@ public class RoundRobin {
 
         // Create Clients
         Client client1 = new Client("10.0.0.1", "New York", "Alice");
-        Client client2 = new Client("10.0.0.2", "Los Angeles", "Bob");
-        Client client3 = new Client("10.0.0.3", "Chicago", "Charlie");
+        Client client2 = new Client("10.0.0.2", "New York", "Bob");
+        Client client3 = new Client("10.0.0.3", "New York", "Charlie");
+        Client client4 = new Client("10.0.0.4", "Chicago", "Dorothy");
+        Client client5 = new Client("10.0.0.5", "New York", "Eustass");
 
         // Handle Requests
-        loadBalancer.handleRequest(client1.Request());
-        loadBalancer.handleRequest(client1.Request());
+
         loadBalancer.handleRequest(client1.Request());
         loadBalancer.handleRequest(client2.Request());
         loadBalancer.handleRequest(client3.Request());
+        loadBalancer.handleRequest(client4.Request());
+        loadBalancer.handleRequest(client5.Request());
     }
 }

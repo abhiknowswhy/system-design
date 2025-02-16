@@ -8,7 +8,7 @@ import system_design.LoadBalancer.LoadBalancer;
 import system_design.LoadBalancer.LoadBalancerFactory;
 import system_design.Server.Server;
 
-public class Random {
+public class LeastConnections {
     public static void main(String[] args) {
         // Create Servers
         Server server1 = new Server("192.168.1.1", "New York");
@@ -19,7 +19,7 @@ public class Random {
 
         // Create Load Balancer using Factory
         LoadBalancer loadBalancer = LoadBalancerFactory.createLoadBalancer(
-                LoadBalancerFactory.Strategy.RANDOM, servers);
+                LoadBalancerFactory.Strategy.LEAST_CONNECTIONS, servers);
 
         // Create Clients
         Client client1 = new Client("10.0.0.1", "New York", "Alice");
@@ -34,6 +34,5 @@ public class Random {
         loadBalancer.handleRequest(client2.Request());
         loadBalancer.handleRequest(client3.Request());
         loadBalancer.handleRequest(client4.Request());
-        loadBalancer.handleRequest(client5.Request());
-    }
+        loadBalancer.handleRequest(client5.Request());}
 }
