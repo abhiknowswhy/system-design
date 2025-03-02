@@ -1,2 +1,2 @@
 # system-design
-This repository is for document knowledge on system design concepts
+This repository is for documenting my knowledge on system design concepts
